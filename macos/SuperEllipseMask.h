@@ -1,8 +1,8 @@
-#import <UIKit/UIKit.h>
+#import <AppKit/AppKit.h>
 
 @class RCTEventDispatcher;
 
-@interface SuperEllipseMask : UIView
+@interface SuperEllipseMask : NSView
 
 @property (nonatomic, assign) CGFloat topLeft;
 @property (nonatomic, assign) CGFloat topRight;

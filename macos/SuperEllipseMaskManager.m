@@ -16,9 +16,9 @@
 
 RCT_EXPORT_MODULE();
 
-- (UIView *)view
+- (NSView *)view
 {
-    return [[SuperEllipseMask alloc] init];
+    return [[SuperEllipseMask alloc] initWithFrame:NSZeroRect];
 }
 
 RCT_EXPORT_VIEW_PROPERTY(topLeft, CGFloat)
