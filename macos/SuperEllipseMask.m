@@ -3,21 +3,18 @@
 
 #import "SuperEllipseMask.h"
 
+const CGFloat coeff = 1.28195;
 
 @implementation SuperEllipseMask
 {
     CAShapeLayer *mask;
     NSBezierPath *path;
-    
-    CGFloat coeff;
     NSArray *values;
 }
 
 - (instancetype)initWithFrame:(CGRect)frame
 {
     if ((self = [super initWithFrame:frame])) {
-        coeff = 1.28195;
-        
         mask = [CAShapeLayer new];
         mask.frame = frame;
         path = [NSBezierPath new];
