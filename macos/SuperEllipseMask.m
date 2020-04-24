@@ -1,4 +1,6 @@
 #import <QuartzCore/QuartzCore.h>
+#import <React/NSView+React.h>
+
 #import "SuperEllipseMask.h"
 
 
@@ -6,7 +8,6 @@
 {
     CAShapeLayer *mask;
     NSBezierPath *path;
-    NSView *maskView;
     
     CGFloat coeff;
     NSArray *values;
@@ -21,12 +22,10 @@
         mask.frame = frame;
         path = [NSBezierPath new];
         mask.fillColor = [NSColor blackColor].CGColor;
-        self.layer.opaque = false;
         
-        // set mask layer
-        maskView = [NSView new];
-        [maskView.layer addSublayer:mask];
-        self.maskView = maskView;
+        [self ensureLayerExists];
+        self.layer.opaque = false;
+        self.layer.mask = mask;
         
         self.topRight = 0;
         self.bottomRight = 0;
