@@ -1,0 +1,5 @@
+{
+  "alias": {
+    "react-native": "@alloc/react-native-macos"
+  }
+}
