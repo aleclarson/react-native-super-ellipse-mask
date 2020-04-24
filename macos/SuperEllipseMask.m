@@ -1,5 +1,6 @@
 #import <QuartzCore/QuartzCore.h>
 #import <React/NSView+React.h>
+#import <React/RCTUtils.h>
 
 #import "SuperEllipseMask.h"
 
@@ -11,6 +12,8 @@ const CGFloat coeff = 1.28195;
     NSBezierPath *path;
     NSArray *values;
 }
+
+RCT_NOT_IMPLEMENTED(- (instancetype)initWithCoder:(NSCoder *)aDecoder)
 
 - (instancetype)initWithFrame:(CGRect)frame
 {
