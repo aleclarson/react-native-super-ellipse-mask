@@ -10,7 +10,6 @@ const CGFloat coeff = 1.28195;
 {
     CAShapeLayer *mask;
     NSBezierPath *path;
-    NSArray *values;
 }
 
 RCT_NOT_IMPLEMENTED(- (instancetype)initWithCoder:(NSCoder *)aDecoder)
