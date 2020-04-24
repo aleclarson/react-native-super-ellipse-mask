@@ -10,8 +10,8 @@
 #endif
 
 
-@implementation SuperEllipseMask : NSView  {
-    
+@implementation SuperEllipseMask
+{
     RCTEventDispatcher *_eventDispatcher;
     CAShapeLayer *mask;
     NSBezierPath *path;
