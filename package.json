@@ -21,9 +21,6 @@
   },
   "author": "everdrone",
   "license": "MIT",
-  "peerDependencies": {
-    "prop-types": "^15.6.1"
-  },
   "devDependencies": {
     "@types/react": "^16.9.34",
     "@types/react-native": "^0.62.4",

@@ -1,5 +1,4 @@
 import React, { Component, ReactNode } from 'react';
-import PropTypes from 'prop-types';
 import { requireNativeComponent, ViewProps } from 'react-native';
 
 const SuperEllipseMask = requireNativeComponent(
@@ -19,12 +18,6 @@ type Props = ViewProps & {
 }
 
 export class SuperEllipseMaskView extends Component<Props> {
-  static propTypes = {
-    topLeft: PropTypes.number,
-    topRight: PropTypes.number,
-    bottomRight: PropTypes.number,
-    bottomLeft: PropTypes.number,
-  };
   render() {
     let { radius, ...rest } = this.props;
 
