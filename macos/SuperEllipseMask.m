@@ -36,6 +36,13 @@
     return self;
 }
 
+- (void)setFrameSize:(NSSize)newSize
+{
+  [super setFrameSize:newSize];
+  
+  mask.frame = self.bounds;
+}
+
 - (void)cornerLogic:(CGRect)rect {
     CGFloat w = rect.size.width;
     CGFloat h = rect.size.height;
