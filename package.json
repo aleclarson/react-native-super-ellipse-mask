@@ -20,6 +20,7 @@
     "url": "https://github.com/everdrone/react-native-super-ellipse-mask"
   },
   "author": "everdrone",
+  "contributors": ["aleclarson"],
   "license": "MIT",
   "peerDependencies": {
     "react": "*",
