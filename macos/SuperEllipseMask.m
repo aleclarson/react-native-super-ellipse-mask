@@ -8,8 +8,8 @@ const CGFloat coeff = 1.28195;
 
 @implementation SuperEllipseMask
 {
-    CAShapeLayer *mask;
-    NSBezierPath *path;
+    CAShapeLayer *_mask;
+    NSBezierPath *_path;
 }
 
 RCT_NOT_IMPLEMENTED(- (instancetype)initWithCoder:(NSCoder *)aDecoder)
@@ -17,14 +17,14 @@ RCT_NOT_IMPLEMENTED(- (instancetype)initWithCoder:(NSCoder *)aDecoder)
 - (instancetype)initWithFrame:(CGRect)frame
 {
     if ((self = [super initWithFrame:frame])) {
-        mask = [CAShapeLayer new];
-        mask.frame = frame;
-        path = [NSBezierPath new];
-        mask.fillColor = [NSColor blackColor].CGColor;
+        _mask = [CAShapeLayer new];
+        _mask.frame = frame;
+        _path = [NSBezierPath new];
+        _mask.fillColor = [NSColor blackColor].CGColor;
         
         [self ensureLayerExists];
         self.layer.opaque = false;
-        self.layer.mask = mask;
+        self.layer.mask = _mask;
         
         self.topRight = 0;
         self.bottomRight = 0;
@@ -39,7 +39,7 @@ RCT_NOT_IMPLEMENTED(- (instancetype)initWithCoder:(NSCoder *)aDecoder)
 {
   [super setFrameSize:newSize];
   
-  mask.frame = self.bounds;
+  _mask.frame = self.bounds;
 }
 
 - (void)cornerLogic:(CGRect)rect {
@@ -87,90 +87,90 @@ RCT_NOT_IMPLEMENTED(- (instancetype)initWithCoder:(NSCoder *)aDecoder)
     
     CGPoint last = CGPointMake(rect.size.width, rect.origin.y);
     // edit path
-    [path moveToPoint:CGPointMake(rect.origin.x + self.topLeft * coeff, last.y)];
+    [_path moveToPoint:CGPointMake(rect.origin.x + self.topLeft * coeff, last.y)];
     
     // top
-    [path lineToPoint:CGPointMake(last.x - self.topRight * coeff, last.y)];
+    [_path lineToPoint:CGPointMake(last.x - self.topRight * coeff, last.y)];
     
     last = CGPointMake(last.x - self.topRight * coeff, last.y);
     // top right c1
-    [path curveToPoint:CGPointMake(last.x + self.topRight * 0.77037, last.y + self.topRight * 0.13357)
-         controlPoint1:CGPointMake(last.x + self.topRight * 0.44576, last.y)
-         controlPoint2:CGPointMake(last.x + self.topRight * 0.6074, last.y + self.topRight * 0.04641)];
+    [_path curveToPoint:CGPointMake(last.x + self.topRight * 0.77037, last.y + self.topRight * 0.13357)
+          controlPoint1:CGPointMake(last.x + self.topRight * 0.44576, last.y)
+          controlPoint2:CGPointMake(last.x + self.topRight * 0.6074, last.y + self.topRight * 0.04641)];
     // top right c2
     last = CGPointMake(last.x + self.topRight * 0.77037, last.y + self.topRight * 0.13357);
-    [path curveToPoint:CGPointMake(last.x + self.topRight * 0.37801, last.y + self.topRight * 0.37801)
-         controlPoint1:CGPointMake(last.x + self.topRight * 0.16296, last.y + self.topRight * 0.08715)
-         controlPoint2:CGPointMake(last.x + self.topRight * 0.290086, last.y + self.topRight * 0.2150)];
+    [_path curveToPoint:CGPointMake(last.x + self.topRight * 0.37801, last.y + self.topRight * 0.37801)
+          controlPoint1:CGPointMake(last.x + self.topRight * 0.16296, last.y + self.topRight * 0.08715)
+          controlPoint2:CGPointMake(last.x + self.topRight * 0.290086, last.y + self.topRight * 0.2150)];
     // top right c3
     last = CGPointMake(last.x + self.topRight * 0.37801, last.y + self.topRight * 0.37801);
-    [path curveToPoint:CGPointMake(last.x + self.topRight * 0.13357, last.y + self.topRight * 0.77037)
-         controlPoint1:CGPointMake(last.x + self.topRight * 0.08715, last.y + self.topRight * 0.16296)
-         controlPoint2:CGPointMake(last.x + self.topRight * 0.13357, last.y + self.topRight * 0.32461)];
+    [_path curveToPoint:CGPointMake(last.x + self.topRight * 0.13357, last.y + self.topRight * 0.77037)
+          controlPoint1:CGPointMake(last.x + self.topRight * 0.08715, last.y + self.topRight * 0.16296)
+          controlPoint2:CGPointMake(last.x + self.topRight * 0.13357, last.y + self.topRight * 0.32461)];
     
     last = CGPointMake(rect.size.width, rect.size.height);
     // right
-    [path lineToPoint:CGPointMake(last.x, last.y - self.bottomRight * coeff)];
+    [_path lineToPoint:CGPointMake(last.x, last.y - self.bottomRight * coeff)];
     
     last = CGPointMake(last.x, last.y - self.bottomRight * coeff);
     // bottom right c1
-    [path curveToPoint:CGPointMake(last.x - self.bottomRight * 0.13357, last.y + self.bottomRight * 0.77037)
-         controlPoint1:CGPointMake(last.x, last.y + self.bottomRight * 0.44576)
-         controlPoint2:CGPointMake(last.x - self.bottomRight * 0.04641, last.y + self.bottomRight * 0.6074)];
+    [_path curveToPoint:CGPointMake(last.x - self.bottomRight * 0.13357, last.y + self.bottomRight * 0.77037)
+          controlPoint1:CGPointMake(last.x, last.y + self.bottomRight * 0.44576)
+          controlPoint2:CGPointMake(last.x - self.bottomRight * 0.04641, last.y + self.bottomRight * 0.6074)];
     // bottom right c2
     last = CGPointMake(last.x - self.bottomRight * 0.13357, last.y + self.bottomRight * 0.77037);
-    [path curveToPoint:CGPointMake(last.x - self.bottomRight * 0.37801, last.y + self.bottomRight * 0.37801)
-         controlPoint1:CGPointMake(last.x - self.bottomRight * 0.08715, last.y + self.bottomRight * 0.16296)
-         controlPoint2:CGPointMake(last.x - self.bottomRight * 0.21505, last.y + self.bottomRight * 0.290086)];
+    [_path curveToPoint:CGPointMake(last.x - self.bottomRight * 0.37801, last.y + self.bottomRight * 0.37801)
+          controlPoint1:CGPointMake(last.x - self.bottomRight * 0.08715, last.y + self.bottomRight * 0.16296)
+          controlPoint2:CGPointMake(last.x - self.bottomRight * 0.21505, last.y + self.bottomRight * 0.290086)];
     // bottom right c3
     last = CGPointMake(last.x - self.bottomRight * 0.37801, last.y + self.bottomRight * 0.37801);
-    [path curveToPoint:CGPointMake(last.x - self.bottomRight * 0.77037, last.y + self.bottomRight * 0.13357)
-         controlPoint1:CGPointMake(last.x - self.bottomRight * 0.16296, last.y + self.bottomRight * 0.08715)
-         controlPoint2:CGPointMake(last.x - self.bottomRight * 0.32461, last.y + self.bottomRight * 0.13357)];
+    [_path curveToPoint:CGPointMake(last.x - self.bottomRight * 0.77037, last.y + self.bottomRight * 0.13357)
+          controlPoint1:CGPointMake(last.x - self.bottomRight * 0.16296, last.y + self.bottomRight * 0.08715)
+          controlPoint2:CGPointMake(last.x - self.bottomRight * 0.32461, last.y + self.bottomRight * 0.13357)];
     
     last = CGPointMake(rect.origin.x, rect.size.height);
     // bottom
-    [path lineToPoint:CGPointMake(last.x + self.bottomLeft * coeff, last.y)];
+    [_path lineToPoint:CGPointMake(last.x + self.bottomLeft * coeff, last.y)];
     
     last = CGPointMake(last.x + self.bottomLeft * coeff, last.y);
     // bottom left c1
-    [path curveToPoint:CGPointMake(last.x - self.bottomLeft * 0.77037, last.y - self.bottomLeft * 0.13357)
-         controlPoint1:CGPointMake(last.x - self.bottomLeft * 0.44576, last.y)
-         controlPoint2:CGPointMake(last.x - self.bottomLeft * 0.6074, last.y - self.bottomLeft * 0.04641)];
+    [_path curveToPoint:CGPointMake(last.x - self.bottomLeft * 0.77037, last.y - self.bottomLeft * 0.13357)
+          controlPoint1:CGPointMake(last.x - self.bottomLeft * 0.44576, last.y)
+          controlPoint2:CGPointMake(last.x - self.bottomLeft * 0.6074, last.y - self.bottomLeft * 0.04641)];
     // bottom left c2
     last = CGPointMake(last.x - self.bottomLeft * 0.77037, last.y - self.bottomLeft * 0.13357);
-    [path curveToPoint:CGPointMake(last.x - self.bottomLeft * 0.37801, last.y - self.bottomLeft * 0.37801)
-         controlPoint1:CGPointMake(last.x - self.bottomLeft * 0.16296, last.y - self.bottomLeft * 0.08715)
-         controlPoint2:CGPointMake(last.x - self.bottomLeft * 0.290086, last.y - self.bottomLeft * 0.2150)];
+    [_path curveToPoint:CGPointMake(last.x - self.bottomLeft * 0.37801, last.y - self.bottomLeft * 0.37801)
+          controlPoint1:CGPointMake(last.x - self.bottomLeft * 0.16296, last.y - self.bottomLeft * 0.08715)
+          controlPoint2:CGPointMake(last.x - self.bottomLeft * 0.290086, last.y - self.bottomLeft * 0.2150)];
     // bottom left c3
     last = CGPointMake(last.x - self.bottomLeft * 0.37801, last.y - self.bottomLeft * 0.37801);
-    [path curveToPoint:CGPointMake(last.x - self.bottomLeft * 0.13357, last.y - self.bottomLeft * 0.77037)
-         controlPoint1:CGPointMake(last.x - self.bottomLeft * 0.08715, last.y - self.bottomLeft * 0.16296)
-         controlPoint2:CGPointMake(last.x - self.bottomLeft * 0.13357, last.y - self.bottomLeft * 0.32461)];
+    [_path curveToPoint:CGPointMake(last.x - self.bottomLeft * 0.13357, last.y - self.bottomLeft * 0.77037)
+          controlPoint1:CGPointMake(last.x - self.bottomLeft * 0.08715, last.y - self.bottomLeft * 0.16296)
+          controlPoint2:CGPointMake(last.x - self.bottomLeft * 0.13357, last.y - self.bottomLeft * 0.32461)];
     
     // left
-    [path lineToPoint:CGPointMake(rect.origin.x, rect.origin.y + self.topLeft * coeff)];
+    [_path lineToPoint:CGPointMake(rect.origin.x, rect.origin.y + self.topLeft * coeff)];
     
     last = CGPointMake(rect.origin.x, rect.origin.y + self.topLeft * coeff);
     // top left c1
-    [path curveToPoint:CGPointMake(last.x + self.topLeft * 0.13357, last.y - self.topLeft * 0.77037)
-         controlPoint1:CGPointMake(last.x, last.y - self.topLeft * 0.44576)
-         controlPoint2:CGPointMake(last.x + self.topLeft * 0.04641, last.y - self.topLeft * 0.6074)];
+    [_path curveToPoint:CGPointMake(last.x + self.topLeft * 0.13357, last.y - self.topLeft * 0.77037)
+          controlPoint1:CGPointMake(last.x, last.y - self.topLeft * 0.44576)
+          controlPoint2:CGPointMake(last.x + self.topLeft * 0.04641, last.y - self.topLeft * 0.6074)];
     // top left c2
     last = CGPointMake(last.x + self.topLeft * 0.13357, last.y - self.topLeft * 0.77037);
-    [path curveToPoint:CGPointMake(last.x + self.topLeft * 0.37801, last.y - self.topLeft * 0.37801)
-         controlPoint1:CGPointMake(last.x + self.topLeft * 0.08715, last.y - self.topLeft * 0.16296)
-         controlPoint2:CGPointMake(last.x + self.topLeft * 0.21505, last.y - self.topLeft * 0.290086)];
+    [_path curveToPoint:CGPointMake(last.x + self.topLeft * 0.37801, last.y - self.topLeft * 0.37801)
+          controlPoint1:CGPointMake(last.x + self.topLeft * 0.08715, last.y - self.topLeft * 0.16296)
+          controlPoint2:CGPointMake(last.x + self.topLeft * 0.21505, last.y - self.topLeft * 0.290086)];
     // top left c3
     last = CGPointMake(last.x + self.topLeft * 0.37801, last.y - self.topLeft * 0.37801);
-    [path curveToPoint:CGPointMake(last.x + self.topLeft * 0.77037, last.y - self.topLeft * 0.13357)
-         controlPoint1:CGPointMake(last.x + self.topLeft * 0.16296, last.y - self.topLeft * 0.08715)
-         controlPoint2:CGPointMake(last.x + self.topLeft * 0.32461, last.y - self.topLeft * 0.13357)];
+    [_path curveToPoint:CGPointMake(last.x + self.topLeft * 0.77037, last.y - self.topLeft * 0.13357)
+          controlPoint1:CGPointMake(last.x + self.topLeft * 0.16296, last.y - self.topLeft * 0.08715)
+          controlPoint2:CGPointMake(last.x + self.topLeft * 0.32461, last.y - self.topLeft * 0.13357)];
     
     
-    [path closePath];
+    [_path closePath];
     // !edit path
-    mask.path = path.CGPath;
+    _mask.path = _path.CGPath;
 }
 
 
