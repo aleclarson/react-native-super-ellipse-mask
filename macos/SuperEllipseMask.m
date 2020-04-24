@@ -1,18 +1,9 @@
 #import <QuartzCore/QuartzCore.h>
 #import "SuperEllipseMask.h"
 
-#if __has_include(<React/RCTEventDispatcher.h>)
-#import <React/RCTEventDispatcher.h>
-#elif __has_include(<RCTEventDispatcher.h>)
-#import “RCTEventDispatcher.h”
-#else
-#import "React/RCTEventDispatcher.h"
-#endif
-
 
 @implementation SuperEllipseMask
 {
-    RCTEventDispatcher *_eventDispatcher;
     CAShapeLayer *mask;
     NSBezierPath *path;
     NSView *maskView;

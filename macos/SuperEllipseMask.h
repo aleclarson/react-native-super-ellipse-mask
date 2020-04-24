@@ -1,7 +1,5 @@
 #import <React/RCTView.h>
 
-@class RCTEventDispatcher;
-
 @interface SuperEllipseMask : RCTView
 
 @property (nonatomic, assign) CGFloat topLeft;
