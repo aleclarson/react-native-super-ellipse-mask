@@ -3,7 +3,9 @@
   "version": "1.0.7",
   "description": "Apple flavored smooth corners for React Native",
   "main": "index.js",
-  "scripts": {},
+  "scripts": {
+    "build": "tsc -p ."
+  },
   "keywords": [
     "react-native",
     "squircle",
@@ -18,8 +20,15 @@
     "url": "https://github.com/everdrone/react-native-super-ellipse-mask"
   },
   "author": "everdrone",
-  "license": "Apple flavored smooth corners for React Native",
+  "license": "MIT",
   "peerDependencies": {
     "prop-types": "^15.6.1"
+  },
+  "devDependencies": {
+    "@types/react": "^16.9.34",
+    "@types/react-native": "^0.62.4",
+    "react": "*",
+    "react-native": "*",
+    "typescript": "^3.8.3"
   }
 }
