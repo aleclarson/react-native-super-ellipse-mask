@@ -11,6 +11,72 @@
 		C3F1E499208C04E400F26380 /* SuperEllipseMaskManager.m in Sources */ = {isa = PBXBuildFile; fileRef = C3F1E498208C04E400F26380 /* SuperEllipseMaskManager.m */; };
 /* End PBXBuildFile section */
 
+/* Begin PBXContainerItemProxy section */
+		703C56B32454B81500E89267 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 703C56972454B4C100E89267 /* React.xcodeproj */;
+			proxyType = 1;
+			remoteGlobalIDString = 83CBBA2D1A601D0E00E9B192;
+			remoteInfo = React;
+		};
+		703C56BD2454B81500E89267 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 703C56972454B4C100E89267 /* React.xcodeproj */;
+			proxyType = 2;
+			remoteGlobalIDString = 83CBBA2E1A601D0E00E9B192;
+			remoteInfo = React;
+		};
+		703C56BF2454B81500E89267 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 703C56972454B4C100E89267 /* React.xcodeproj */;
+			proxyType = 2;
+			remoteGlobalIDString = 3D3C059A1DE3340900C268FA;
+			remoteInfo = yoga;
+		};
+		703C56C12454B81500E89267 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 703C56972454B4C100E89267 /* React.xcodeproj */;
+			proxyType = 2;
+			remoteGlobalIDString = 3D3CD9251DE5FBEC00167DC4;
+			remoteInfo = cxxreact;
+		};
+		703C56C32454B81500E89267 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 703C56972454B4C100E89267 /* React.xcodeproj */;
+			proxyType = 2;
+			remoteGlobalIDString = 3D3CD90B1DE5FBD600167DC4;
+			remoteInfo = jschelpers;
+		};
+		703C56C52454B81500E89267 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 703C56972454B4C100E89267 /* React.xcodeproj */;
+			proxyType = 2;
+			remoteGlobalIDString = EBF21BDC1FC498900052F4D5;
+			remoteInfo = jsinspector;
+		};
+		703C56C72454B81500E89267 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 703C56972454B4C100E89267 /* React.xcodeproj */;
+			proxyType = 2;
+			remoteGlobalIDString = 139D7ECE1E25DB7D00323FB7;
+			remoteInfo = "third-party";
+		};
+		703C56C92454B81500E89267 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 703C56972454B4C100E89267 /* React.xcodeproj */;
+			proxyType = 2;
+			remoteGlobalIDString = 139D7E881E25C6D100323FB7;
+			remoteInfo = "double-conversion";
+		};
+		703C56CB2454B81500E89267 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 703C56972454B4C100E89267 /* React.xcodeproj */;
+			proxyType = 2;
+			remoteGlobalIDString = 9936F3131F5F2E4B0010BF04;
+			remoteInfo = privatedata;
+		};
+/* End PBXContainerItemProxy section */
+
 /* Begin PBXCopyFilesBuildPhase section */
 		58B511D91A9E6C8500147676 /* CopyFiles */ = {
 			isa = PBXCopyFilesBuildPhase;
@@ -25,6 +91,7 @@
 
 /* Begin PBXFileReference section */
 		134814201AA4EA6300B7C361 /* libRNSuperEllipseMask.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = libRNSuperEllipseMask.a; sourceTree = BUILT_PRODUCTS_DIR; };
+		703C56972454B4C100E89267 /* React.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = React.xcodeproj; path = "../node_modules/react-native/React/React.xcodeproj"; sourceTree = "<group>"; };
 		B3E7B5881CC2AC0600A0062D /* SuperEllipseMask.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SuperEllipseMask.h; sourceTree = "<group>"; };
 		B3E7B5891CC2AC0600A0062D /* SuperEllipseMask.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SuperEllipseMask.m; sourceTree = "<group>"; };
 		C3F1E495208C04B500F26380 /* SuperEllipseMaskManager.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = SuperEllipseMaskManager.h; sourceTree = "<group>"; };
@@ -57,8 +124,32 @@
 				C3F1E495208C04B500F26380 /* SuperEllipseMaskManager.h */,
 				B3E7B5881CC2AC0600A0062D /* SuperEllipseMask.h */,
 				B3E7B5891CC2AC0600A0062D /* SuperEllipseMask.m */,
+				703C56932454B47000E89267 /* Libraries */,
 				134814211AA4EA7D00B7C361 /* Products */,
 			);
+			sourceTree = "<group>";
+		};
+		703C56932454B47000E89267 /* Libraries */ = {
+			isa = PBXGroup;
+			children = (
+				703C56972454B4C100E89267 /* React.xcodeproj */,
+			);
+			name = Libraries;
+			sourceTree = "<group>";
+		};
+		703C56982454B4C100E89267 /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				703C56BE2454B81500E89267 /* libReact.a */,
+				703C56C02454B81500E89267 /* libyoga.a */,
+				703C56C22454B81500E89267 /* libcxxreact.a */,
+				703C56C42454B81500E89267 /* libjschelpers.a */,
+				703C56C62454B81500E89267 /* libjsinspector.a */,
+				703C56C82454B81500E89267 /* libthird-party.a */,
+				703C56CA2454B81500E89267 /* libdouble-conversion.a */,
+				703C56CC2454B81500E89267 /* libprivatedata.a */,
+			);
+			name = Products;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -75,6 +166,7 @@
 			buildRules = (
 			);
 			dependencies = (
+				703C56B42454B81500E89267 /* PBXTargetDependency */,
 			);
 			name = RNSuperEllipseMask;
 			productName = RCTDataManager;
@@ -106,12 +198,77 @@
 			mainGroup = 58B511D21A9E6C8500147676;
 			productRefGroup = 58B511D21A9E6C8500147676;
 			projectDirPath = "";
+			projectReferences = (
+				{
+					ProductGroup = 703C56982454B4C100E89267 /* Products */;
+					ProjectRef = 703C56972454B4C100E89267 /* React.xcodeproj */;
+				},
+			);
 			projectRoot = "";
 			targets = (
 				58B511DA1A9E6C8500147676 /* RNSuperEllipseMask */,
 			);
 		};
 /* End PBXProject section */
+
+/* Begin PBXReferenceProxy section */
+		703C56BE2454B81500E89267 /* libReact.a */ = {
+			isa = PBXReferenceProxy;
+			fileType = archive.ar;
+			path = libReact.a;
+			remoteRef = 703C56BD2454B81500E89267 /* PBXContainerItemProxy */;
+			sourceTree = BUILT_PRODUCTS_DIR;
+		};
+		703C56C02454B81500E89267 /* libyoga.a */ = {
+			isa = PBXReferenceProxy;
+			fileType = archive.ar;
+			path = libyoga.a;
+			remoteRef = 703C56BF2454B81500E89267 /* PBXContainerItemProxy */;
+			sourceTree = BUILT_PRODUCTS_DIR;
+		};
+		703C56C22454B81500E89267 /* libcxxreact.a */ = {
+			isa = PBXReferenceProxy;
+			fileType = archive.ar;
+			path = libcxxreact.a;
+			remoteRef = 703C56C12454B81500E89267 /* PBXContainerItemProxy */;
+			sourceTree = BUILT_PRODUCTS_DIR;
+		};
+		703C56C42454B81500E89267 /* libjschelpers.a */ = {
+			isa = PBXReferenceProxy;
+			fileType = archive.ar;
+			path = libjschelpers.a;
+			remoteRef = 703C56C32454B81500E89267 /* PBXContainerItemProxy */;
+			sourceTree = BUILT_PRODUCTS_DIR;
+		};
+		703C56C62454B81500E89267 /* libjsinspector.a */ = {
+			isa = PBXReferenceProxy;
+			fileType = archive.ar;
+			path = libjsinspector.a;
+			remoteRef = 703C56C52454B81500E89267 /* PBXContainerItemProxy */;
+			sourceTree = BUILT_PRODUCTS_DIR;
+		};
+		703C56C82454B81500E89267 /* libthird-party.a */ = {
+			isa = PBXReferenceProxy;
+			fileType = archive.ar;
+			path = "libthird-party.a";
+			remoteRef = 703C56C72454B81500E89267 /* PBXContainerItemProxy */;
+			sourceTree = BUILT_PRODUCTS_DIR;
+		};
+		703C56CA2454B81500E89267 /* libdouble-conversion.a */ = {
+			isa = PBXReferenceProxy;
+			fileType = archive.ar;
+			path = "libdouble-conversion.a";
+			remoteRef = 703C56C92454B81500E89267 /* PBXContainerItemProxy */;
+			sourceTree = BUILT_PRODUCTS_DIR;
+		};
+		703C56CC2454B81500E89267 /* libprivatedata.a */ = {
+			isa = PBXReferenceProxy;
+			fileType = archive.ar;
+			path = libprivatedata.a;
+			remoteRef = 703C56CB2454B81500E89267 /* PBXContainerItemProxy */;
+			sourceTree = BUILT_PRODUCTS_DIR;
+		};
+/* End PBXReferenceProxy section */
 
 /* Begin PBXSourcesBuildPhase section */
 		58B511D71A9E6C8500147676 /* Sources */ = {
@@ -124,6 +281,14 @@
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXSourcesBuildPhase section */
+
+/* Begin PBXTargetDependency section */
+		703C56B42454B81500E89267 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			name = React;
+			targetProxy = 703C56B32454B81500E89267 /* PBXContainerItemProxy */;
+		};
+/* End PBXTargetDependency section */
 
 /* Begin XCBuildConfiguration section */
 		58B511ED1A9E6C8500147676 /* Debug */ = {
