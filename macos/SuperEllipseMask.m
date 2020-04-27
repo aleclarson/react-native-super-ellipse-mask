@@ -25,11 +25,6 @@ RCT_NOT_IMPLEMENTED(- (instancetype)initWithCoder:(NSCoder *)aDecoder)
         [self ensureLayerExists];
         self.layer.opaque = false;
         self.layer.mask = _mask;
-        
-        self.topRight = 0;
-        self.bottomRight = 0;
-        self.topLeft = 0;
-        self.bottomLeft = 0;
     }
     
     return self;
