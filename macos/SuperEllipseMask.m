@@ -67,6 +67,7 @@ setCornerRadius(bottomRight, BottomRight)
 
     _mask.frame = self.bounds;
     _path = nil;
+    [self.layer setNeedsDisplay];
 }
 
 // @override
