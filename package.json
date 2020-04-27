@@ -2,7 +2,7 @@
   "name": "react-native-super-ellipse-mask",
   "version": "1.0.7",
   "description": "Apple flavored smooth corners for React Native",
-  "main": "index.js",
+  "main": "SuperEllipseMaskView.js",
   "scripts": {
     "build": "tsc -p ."
   },
