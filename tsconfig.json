@@ -1,9 +1,12 @@
 {
+  "include": ["*.tsx"],
   "compilerOptions": {
+    "declaration": true,
     "esModuleInterop": true,
     "jsx": "react",
     "lib": ["es2017"],
     "moduleResolution": "node",
+    "preserveSymlinks": true,
     "strict": true,
     "target": "esnext",
   }
