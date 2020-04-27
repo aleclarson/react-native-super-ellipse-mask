@@ -8,8 +8,6 @@
 
 /* Begin PBXBuildFile section */
 		B3E7B58A1CC2AC0600A0062D /* SuperEllipseMask.m in Sources */ = {isa = PBXBuildFile; fileRef = B3E7B5891CC2AC0600A0062D /* SuperEllipseMask.m */; };
-		C3F1E496208C04D200F26380 /* SuperEllipseMaskManager.h in Sources */ = {isa = PBXBuildFile; fileRef = C3F1E495208C04B500F26380 /* SuperEllipseMaskManager.h */; };
-		C3F1E497208C04D500F26380 /* SuperEllipseMask.h in Sources */ = {isa = PBXBuildFile; fileRef = B3E7B5881CC2AC0600A0062D /* SuperEllipseMask.h */; };
 		C3F1E499208C04E400F26380 /* SuperEllipseMaskManager.m in Sources */ = {isa = PBXBuildFile; fileRef = C3F1E498208C04E400F26380 /* SuperEllipseMaskManager.m */; };
 /* End PBXBuildFile section */
 
@@ -121,8 +119,6 @@
 			buildActionMask = 2147483647;
 			files = (
 				C3F1E499208C04E400F26380 /* SuperEllipseMaskManager.m in Sources */,
-				C3F1E497208C04D500F26380 /* SuperEllipseMask.h in Sources */,
-				C3F1E496208C04D200F26380 /* SuperEllipseMaskManager.h in Sources */,
 				B3E7B58A1CC2AC0600A0062D /* SuperEllipseMask.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
