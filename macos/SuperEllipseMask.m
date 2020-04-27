@@ -19,7 +19,6 @@ RCT_NOT_IMPLEMENTED(- (instancetype)initWithCoder:(NSCoder *)aDecoder)
     if ((self = [super initWithFrame:frame])) {
         _mask = [CAShapeLayer new];
         _mask.frame = frame;
-        _path = [NSBezierPath new];
         _mask.fillColor = [NSColor blackColor].CGColor;
         
         [self ensureLayerExists];
@@ -29,6 +28,31 @@ RCT_NOT_IMPLEMENTED(- (instancetype)initWithCoder:(NSCoder *)aDecoder)
     
     return self;
 }
+
+- (NSBezierPath *)path
+{
+    if (_path == nil) {
+        _path = [self createSuperEllipsePath:self.bounds radii:self.cornerRadii];
+    }
+    return _path;
+}
+
+#pragma mark - setTopLeft, setTopRight, etc
+
+#define setCornerRadius(GET, SET) \
+  - (void)set##SET:(CGFloat)value \
+  { \
+      if (_##GET == value) { \
+          return; \
+      } \
+      _##GET = value;  \
+      _path = nil;  \
+  }
+
+setCornerRadius(topLeft, TopLeft)
+setCornerRadius(topRight, TopRight)
+setCornerRadius(bottomLeft, BottomLeft)
+setCornerRadius(bottomRight, BottomRight)
 
 - (void)setFrameSize:(NSSize)newSize
 {
