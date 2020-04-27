@@ -56,7 +56,10 @@ setCornerRadius(bottomRight, BottomRight)
 
 - (void)setFrameSize:(NSSize)newSize
 {
-  [super setFrameSize:newSize];
+    [super setFrameSize:newSize];
+
+    _mask.frame = self.bounds;
+    _path = nil;
   
   _mask.frame = self.bounds;
 }
