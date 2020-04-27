@@ -1,14 +1,8 @@
 #import <Foundation/Foundation.h>
+#import <React/RCTBridge.h>
+
 #import "SuperEllipseMask.h"
 #import "SuperEllipseMaskManager.h"
-
-#if __has_include(<React/RCTBridge.h>)
-#import <React/RCTBridge.h>
-#elif __has_include(“RCTBridge.h”)
-#import “RCTBridge.h”
-#else
-#import “React/RCTBridge.h”
-#endif
 
 @implementation SuperEllipseMaskManager
 
