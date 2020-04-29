@@ -4,7 +4,6 @@
 #import <React/NSBezierPath+CGPath.h>
 #import <React/UIImageUtils.h>
 #import <React/RCTUtils.h>
-#import <React/RCTLog.h>
 
 #import "SuperEllipseMask.h"
 
@@ -13,7 +12,6 @@ const CGFloat coeff = 1.28195;
 @implementation SuperEllipseMask
 {
     CAShapeLayer *_mask;
-    NSBezierPath *_path;
 }
 
 RCT_NOT_IMPLEMENTED(- (instancetype)initWithCoder:(NSCoder *)aDecoder)
@@ -33,30 +31,15 @@ RCT_NOT_IMPLEMENTED(- (instancetype)initWithCoder:(NSCoder *)aDecoder)
     return self;
 }
 
-- (NSBezierPath *)path
+#pragma mark - Helper functions
+
+BOOL RCTCornerRadiiEqualsRadii(RCTCornerRadii a, RCTCornerRadii b)
 {
-    if (_path == nil) {
-        _path = [self createSuperEllipsePath:self.bounds radii:self.cornerRadii];
-    }
-    return _path;
+  return a.topLeft == b.topLeft &&
+      a.topRight == b.topRight &&
+      a.bottomLeft == b.bottomLeft &&
+      a.bottomRight == b.bottomRight;
 }
-
-#pragma mark - setTopLeft, setTopRight, etc
-
-#define setCornerRadius(GET, SET) \
-  - (void)set##SET:(CGFloat)value \
-  { \
-      if (_##GET == value) { \
-          return; \
-      } \
-      _##GET = value;  \
-      _path = nil;  \
-  }
-
-setCornerRadius(topLeft, TopLeft)
-setCornerRadius(topRight, TopRight)
-setCornerRadius(bottomLeft, BottomLeft)
-setCornerRadius(bottomRight, BottomRight)
 
 #pragma mark - Overrides
 
@@ -66,7 +49,6 @@ setCornerRadius(bottomRight, BottomRight)
     [super setFrameSize:newSize];
 
     _mask.frame = self.bounds;
-    _path = nil;
     [self.layer setNeedsDisplay];
 }
 
@@ -94,24 +76,10 @@ setCornerRadius(bottomRight, BottomRight)
       ? [NSColor colorWithCGColor:borderColors.top]
       : NSColor.clearColor;
 
-    // The area within the border, excluding the border width.
-    NSRect borderRect = {
-      {borderWidth, borderWidth},
-      {size.width - borderWidth, size.height - borderWidth}
-    };
-
-    // TODO: Is this the proper equation for border-radius scaling?
-    CGFloat scale = borderRect.size.width / size.width;
-    RCTCornerRadii radii = [self cornerRadiiWithSize:borderRect.size
-                                               radii:(RCTCornerRadii){
-                                                 _topLeft * scale,
-                                                 _topRight * scale,
-                                                 _bottomLeft * scale,
-                                                 _bottomRight * scale,
-                                               }];
+    NSBezierPath *maskPath = [self createSuperEllipsePath];
 
     if (bgColor.alphaComponent > 0) {
-      NSBezierPath *fillPath = self.path;
+      NSBezierPath *fillPath = maskPath;
       
       // The background path is slightly inset from the masking path
       // to ensure the fill color mixes w/ the border color properly.
@@ -123,7 +91,7 @@ setCornerRadius(bottomRight, BottomRight)
           {size.width - inset, size.height - inset}
         };
 
-        fillPath = [self createSuperEllipsePath:fillRect radii:radii];
+        fillPath = [self createSuperEllipsePath:fillRect];
       }
 
       [bgColor setFill];
@@ -132,10 +100,16 @@ setCornerRadius(bottomRight, BottomRight)
   
     // The border outline is identical to the masking path.
     NSBezierPath *borderPath = [NSBezierPath bezierPath];
-    [borderPath appendBezierPath:self.path];
+    [borderPath appendBezierPath:maskPath];
+
+    // The border-enclosed area (excluding the border itself).
+    NSRect clipRect = {
+      {borderWidth, borderWidth},
+      {size.width - borderWidth, size.height - borderWidth}
+    };
 
     // Clip the border-enclosed area.
-    NSBezierPath *clipPath = [self createSuperEllipsePath:borderRect radii:radii];
+    NSBezierPath *clipPath = [self createSuperEllipsePath:clipRect];
     [borderPath appendBezierPath:[clipPath bezierPathByReversingPath]];
 
     // Fill the border.
@@ -152,7 +126,7 @@ setCornerRadius(bottomRight, BottomRight)
 {
     if (self.clipsToBounds) {
         CGMutablePathRef cgPath = CGPathCreateMutable();
-        [self.path applyToCGPath:cgPath];
+        [[self createSuperEllipsePath] applyToCGPath:cgPath];
 
         _mask.path = cgPath;
         CGPathRelease(cgPath);
@@ -163,22 +137,19 @@ setCornerRadius(bottomRight, BottomRight)
     }
 }
 
-// @override
-- (RCTCornerRadii)cornerRadii
-{
-    return [self cornerRadiiWithSize:self.bounds.size];
-}
-
 #pragma mark - Corner logic
 
-- (RCTCornerRadii)cornerRadiiWithSize:(NSSize)size
+RCTCornerRadii RCTScaledCornerRadii(RCTCornerRadii cornerRadii, CGFloat scale)
 {
-  RCTCornerRadii radii = {_topLeft, _topRight, _bottomLeft, _bottomRight};
-  return [self cornerRadiiWithSize:size radii:radii];
+  return (RCTCornerRadii){
+    cornerRadii.topLeft * scale,
+    cornerRadii.topRight * scale,
+    cornerRadii.bottomLeft * scale,
+    cornerRadii.bottomRight * scale,
+  };
 }
 
-- (RCTCornerRadii)cornerRadiiWithSize:(NSSize)size
-                                radii:(RCTCornerRadii)radii
+RCTCornerRadii RCTClampCornerRadii(RCTCornerRadii radii, NSSize size)
 {
     CGFloat w = size.width;
     CGFloat h = size.height;
@@ -216,8 +187,22 @@ setCornerRadius(bottomRight, BottomRight)
 
 #pragma mark - Path creation
 
+- (NSBezierPath *)createSuperEllipsePath
+{
+  return [self createSuperEllipsePath:self.bounds radii:self.cornerRadii];
+}
+
+- (NSBezierPath *)createSuperEllipsePath:(NSRect)rect
+{
+  // TODO: Is this the proper equation for border-radius scaling?
+  CGFloat scale = MIN(rect.size.width, rect.size.height) / MIN(self.bounds.size.width, self.bounds.size.height);
+  return [self createSuperEllipsePath:rect radii:RCTScaledCornerRadii(self.cornerRadii, scale)];
+}
+
 - (NSBezierPath *)createSuperEllipsePath:(NSRect)rect radii:(RCTCornerRadii)radii
 {
+    radii = RCTClampCornerRadii(radii, rect.size);
+
     CGFloat x = rect.origin.x;
     CGFloat y = rect.origin.y;
     CGFloat width = rect.size.width;
