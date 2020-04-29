@@ -10,11 +10,18 @@
 const CGFloat coeff = 1.28195;
 
 @interface RCTView ()
+
+- (RCTCornerRadii)cornerRadii;
+
+- (NSEdgeInsets)bordersAsInsets;
+
 - (void)updateClippingForLayer:(CALayer *)layer;
+
 - (NSImage *)createBorderImage:(NSSize)size
                    cornerRadii:(RCTCornerRadii)cornerRadii
                   borderInsets:(NSEdgeInsets)borderInsets
                   borderColors:(RCTBorderColors)borderColors;
+
 @end
 
 @implementation SuperEllipseMask
