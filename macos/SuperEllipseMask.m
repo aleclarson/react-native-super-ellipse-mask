@@ -9,6 +9,14 @@
 
 const CGFloat coeff = 1.28195;
 
+@interface RCTView ()
+- (void)updateClippingForLayer:(CALayer *)layer;
+- (NSImage *)createBorderImage:(NSSize)size
+                   cornerRadii:(RCTCornerRadii)cornerRadii
+                  borderInsets:(NSEdgeInsets)borderInsets
+                  borderColors:(RCTBorderColors)borderColors;
+@end
+
 @implementation SuperEllipseMask
 {
     CAShapeLayer *_mask;
@@ -41,6 +49,13 @@ BOOL RCTCornerRadiiEqualsRadii(RCTCornerRadii a, RCTCornerRadii b)
       a.bottomRight == b.bottomRight;
 }
 
+BOOL RCTIsCircle(NSSize size, RCTCornerRadii radii)
+{
+  return size.width == size.height &&
+      radii.topLeft == size.width / 2.0 &&
+      RCTCornerRadiiAreEqual(radii);
+}
+
 #pragma mark - Overrides
 
 // @override
@@ -58,9 +73,16 @@ BOOL RCTCornerRadiiEqualsRadii(RCTCornerRadii a, RCTCornerRadii b)
                   borderInsets:(NSEdgeInsets)borderInsets
                   borderColors:(RCTBorderColors)borderColors
 {
-    if (!RCTBorderColorsAreEqual(borderColors) || !RCTBorderInsetsAreEqual(borderInsets)) {
-      RCTLogWarn(@"Unsupported border style. Border must have equal colors and widths.");
-      return nil;
+    if (
+      RCTIsCircle(size, self.cornerRadii) ||
+      !RCTBorderColorsAreEqual(borderColors) ||
+      !RCTBorderInsetsAreEqual(borderInsets)
+    ) {
+      // Fall back to normal rounding when the view is a circle or the border is irregular.
+      return [super createBorderImage:size
+                          cornerRadii:cornerRadii
+                         borderInsets:borderInsets
+                         borderColors:borderColors];
     }
 
     NSColor *bgColor = self.backgroundColor;
@@ -125,6 +147,11 @@ BOOL RCTCornerRadiiEqualsRadii(RCTCornerRadii a, RCTCornerRadii b)
 - (void)updateClippingForLayer:(CALayer *)layer
 {
     if (self.clipsToBounds) {
+        if (RCTIsCircle(layer.bounds.size, self.cornerRadii)) {
+            // Use faster code path for circles.
+            return [super updateClippingForLayer:layer];
+        }
+
         CGMutablePathRef cgPath = CGPathCreateMutable();
         [[self createSuperEllipsePath] applyToCGPath:cgPath];
 
