@@ -235,8 +235,6 @@ RCTCornerRadii RCTClampCornerRadii(RCTCornerRadii radii, NSSize size)
 
 - (NSBezierPath *)createSuperEllipsePath:(NSRect)rect radii:(RCTCornerRadii)radii
 {
-    radii = RCTClampCornerRadii(radii, rect.size);
-
     CGFloat x = rect.origin.x;
     CGFloat y = rect.origin.y;
     CGFloat width = rect.size.width;
