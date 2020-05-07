@@ -27,12 +27,9 @@
     "react-native": "*"
   },
   "devDependencies": {
-    "react": "*",
-    "react-native": "*",
     "@types/react": "^16.9.34",
-    "@types/react-native": "^0.62.4",
     "react": "*",
-    "react-native": "*",
+    "react-native": "npm:@alloc/react-native-macos@*",
     "typescript": "^3.8.3"
   }
 }
