@@ -247,6 +247,23 @@ RCTCornerRadii RCTClampCornerRadii(RCTCornerRadii radii, NSSize size)
     CGFloat bottomLeft = radii.bottomLeft;
     CGFloat bottomRight = radii.bottomRight;
 
+    CGFloat minLength = MIN(width, height);
+    CGFloat maxRadius = minLength / 2;
+    CGFloat newRadius = maxRadius - 3.0;
+    CGFloat threshold = -0.01;
+    if (topLeft - maxRadius > threshold) {
+      topLeft = newRadius;
+    }
+    if (topRight - maxRadius > threshold) {
+      topRight = newRadius;
+    }
+    if (bottomLeft - maxRadius > threshold) {
+      bottomLeft = newRadius;
+    }
+    if (bottomRight - maxRadius > threshold) {
+      bottomRight = newRadius;
+    }
+
     NSBezierPath *path = [NSBezierPath new];
 
     CGPoint last = CGPointMake(width, y);
