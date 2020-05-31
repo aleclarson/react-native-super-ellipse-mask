@@ -4,7 +4,8 @@
   "description": "Apple flavored smooth corners for React Native",
   "main": "SuperEllipseMaskView.js",
   "scripts": {
-    "build": "tsc -p ."
+    "build": "tsc -p .",
+    "prepare": "npm run build"
   },
   "keywords": [
     "react-native",
