@@ -1,6 +1,6 @@
 {
   "name": "@alloc/react-native-super-ellipse-mask",
-  "version": "1.0.7",
+  "version": "0.1.0",
   "description": "Apple flavored smooth corners for React Native",
   "main": "SuperEllipseMaskView.js",
   "scripts": {
@@ -20,7 +20,9 @@
     "url": "https://github.com/everdrone/react-native-super-ellipse-mask"
   },
   "author": "everdrone",
-  "contributors": ["aleclarson"],
+  "contributors": [
+    "aleclarson"
+  ],
   "license": "MIT",
   "peerDependencies": {
     "react": "*",
