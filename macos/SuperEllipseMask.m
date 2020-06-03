@@ -41,6 +41,8 @@ RCT_NOT_IMPLEMENTED(- (instancetype)initWithCoder:(NSCoder *)aDecoder)
         [self ensureLayerExists];
         self.layer.opaque = false;
         self.layer.mask = _mask;
+        
+        self.redrawsBorderImageOnSizeChange = YES;
     }
     
     return self;
