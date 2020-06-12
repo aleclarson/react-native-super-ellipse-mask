@@ -34,13 +34,8 @@ RCT_NOT_IMPLEMENTED(- (instancetype)initWithCoder:(NSCoder *)aDecoder)
 - (instancetype)initWithFrame:(CGRect)frame
 {
     if ((self = [super initWithFrame:frame])) {
-        _mask = [CAShapeLayer new];
-        _mask.frame = frame;
-        _mask.fillColor = [NSColor blackColor].CGColor;
-        
         [self ensureLayerExists];
         self.layer.opaque = false;
-        self.layer.mask = _mask;
         
         self.redrawsBorderImageOnSizeChange = YES;
     }
@@ -66,6 +61,19 @@ BOOL RCTIsCircle(NSSize size, RCTCornerRadii radii)
 }
 
 #pragma mark - Overrides
+
+- (void)setClipsToBounds:(BOOL)clipsToBounds
+{
+    super.clipsToBounds = clipsToBounds;
+    
+    if (clipsToBounds) {
+        _mask = [CAShapeLayer new];
+        _mask.frame = self.bounds;
+        _mask.fillColor = [NSColor blackColor].CGColor;
+    } else {
+        _mask = nil;
+    }
+}
 
 // @override
 - (void)setFrameSize:(NSSize)newSize
