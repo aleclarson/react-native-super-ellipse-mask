@@ -142,18 +142,20 @@ BOOL RCTIsCircle(NSSize size, RCTCornerRadii radii)
     [borderPath appendBezierPath:maskPath];
 
     // The border-enclosed area (excluding the border itself).
-    NSRect clipRect = {
-      {borderWidth, borderWidth},
-      {size.width - borderWidth, size.height - borderWidth}
-    };
+    if (borderWidth > 0) {
+        NSRect clipRect = {
+          {borderWidth, borderWidth},
+          {size.width - borderWidth, size.height - borderWidth}
+        };
 
-    // Clip the border-enclosed area.
-    NSBezierPath *clipPath = [self createSuperEllipsePath:clipRect];
-    [borderPath appendBezierPath:[clipPath bezierPathByReversingPath]];
+        // Clip the border-enclosed area.
+        NSBezierPath *clipPath = [self createSuperEllipsePath:clipRect];
+        [borderPath appendBezierPath:[clipPath bezierPathByReversingPath]];
 
-    // Fill the border.
-    [borderColor setFill];
-    [borderPath fill];
+        // Fill the border.
+        [borderColor setFill];
+        [borderPath fill];
+    }
 
     NSImage *image = UIGraphicsGetImageFromCurrentImageContext();
     UIGraphicsEndImageContext();
