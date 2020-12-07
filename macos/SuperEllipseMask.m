@@ -103,12 +103,8 @@ BOOL RCTIsCircle(NSSize size, RCTCornerRadii radii)
     }
 
     NSColor *bgColor = self.backgroundColor;
-    BOOL opaque =
-      bgColor.alphaComponent == 1.0 &&
-        (self.clipsToBounds ||
-          !RCTCornerRadiiAreAboveThreshold(cornerRadii));
 
-    UIGraphicsBeginImageContextWithOptions(size, opaque, 0.0);
+    UIGraphicsBeginImageContextWithOptions(size, NO, 0.0);
 
     CGFloat borderWidth = borderInsets.top;
     NSColor *borderColor = borderColors.top
