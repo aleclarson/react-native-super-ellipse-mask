@@ -91,7 +91,7 @@ BOOL RCTIsCircle(NSSize size, RCTCornerRadii radii)
                   borderColors:(RCTBorderColors)borderColors
 {
     if (
-      RCTIsCircle(size, self.cornerRadii) ||
+      RCTIsCircle(size, cornerRadii) ||
       !RCTBorderColorsAreEqual(borderColors) ||
       !RCTBorderInsetsAreEqual(borderInsets)
     ) {
