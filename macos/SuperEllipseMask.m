@@ -36,8 +36,6 @@ RCT_NOT_IMPLEMENTED(- (instancetype)initWithCoder:(NSCoder *)aDecoder)
     if ((self = [super initWithFrame:frame])) {
         [self ensureLayerExists];
         self.layer.opaque = false;
-        
-        self.redrawsBorderImageOnSizeChange = YES;
     }
     
     return self;
@@ -73,6 +71,12 @@ BOOL RCTIsCircle(NSSize size, RCTCornerRadii radii)
     } else {
         _mask = nil;
     }
+}
+
+- (BOOL)shouldRedrawBorderOnResize
+{
+  // Always redraw border on resize, because super ellipse depends on width/height.
+  return YES;
 }
 
 // @override
